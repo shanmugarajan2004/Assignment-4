@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+union student {
+    char name[50];
+    float gpa;
+};
+
+int main() {
+    union student s;
+    int choice;
+
+    printf("Enter 1 to store name or 2 to store GPA: ");
+    scanf("%d", &choice);
+
+    if(choice == 1) {
+        printf("Enter student name: ");
+        scanf("%s", s.name);
+        printf("Student name: %s\n", s.name);
+    }
+    else if(choice == 2) {
+        printf("Enter student GPA: ");
+        scanf("%f", &s.gpa);
+        printf("Student GPA: %.2f\n", s.gpa);
+    }
+    else {
+        printf("Invalid choice!\n");
+    }
+
+    return 0;
+}
