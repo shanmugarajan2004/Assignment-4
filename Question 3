@@ -1,0 +1,54 @@
+
+#include <stdio.h>
+#include <time.h>
+
+struct Date {
+    int day, month, year;
+};
+
+struct Student {
+    char name[50];
+    int roll_number;
+    struct Date birthday;
+    struct Date admission_date;
+};
+
+int calculate_age(struct Date birth_date, struct Date admission_date) {
+    int age = admission_date.year - birth_date.year;
+
+    // Check if the birth date has not yet occurred in the current year
+    if (admission_date.month < birth_date.month || 
+        (admission_date.month == birth_date.month && admission_date.day < birth_date.day)) {
+        age--;
+    }
+
+    return age;
+}
+
+int main() {
+    struct Student student;
+
+    printf("Enter the name of the student: ");
+    scanf("%s", student.name);
+
+    printf("Enter the roll number of the student: ");
+    scanf("%d", &student.roll_number);
+
+    printf("Enter the birthday of the student (dd mm yyyy): ");
+    scanf("%d %d %d", &student.birthday.day, &student.birthday.month, &student.birthday.year);
+
+    printf("Enter the admission date of the student (dd mm yyyy): ");
+    scanf("%d %d %d", &student.admission_date.day, &student.admission_date.month, &student.admission_date.year);
+
+    int age_at_admission = calculate_age(student.birthday, student.admission_date);
+
+    printf("\nStudent Information:\n");
+    printf("--------------------\n");
+    printf("Name: %s\n", student.name);
+    printf("Roll number: %d\n", student.roll_number);
+    printf("Birthday: %02d-%02d-%04d\n", student.birthday.day, student.birthday.month, student.birthday.year);
+    printf("Admission date: %02d-%02d-%04d\n", student.admission_date.day, student.admission_date.month, student.admission_date.year);
+    printf("Age at admission: %d years\n", age_at_admission);
+
+    return 0;
+}
